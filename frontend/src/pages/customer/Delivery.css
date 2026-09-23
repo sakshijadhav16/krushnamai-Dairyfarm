@@ -1,0 +1,331 @@
+* {
+  box-sizing: border-box;
+}
+
+.delivery-page {
+  min-height: 100vh;
+  background: #f5faf6;
+}
+
+/* NAVBAR */
+
+.delivery-navbar {
+  height: 70px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.delivery-logo {
+  font-size: 21px;
+  font-weight: bold;
+  color: #218c4b;
+}
+
+.delivery-nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.delivery-nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+.delivery-nav-links a:hover {
+  color: #218c4b;
+}
+
+/* CONTAINER */
+
+.delivery-container {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+/* HEADER */
+
+.delivery-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.success-icon {
+  width: 65px;
+  height: 65px;
+  margin: auto;
+  border-radius: 50%;
+  background: #218c4b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.delivery-header h1 {
+  color: #218c4b;
+  margin: 15px 0 8px;
+}
+
+.delivery-header p {
+  color: #666;
+}
+
+/* CARD */
+
+.delivery-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.delivery-card h2 {
+  color: #218c4b;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* CARD TITLE */
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title h2 {
+  margin-bottom: 0;
+}
+
+.order-status {
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: #e9f8ee;
+  color: #218c4b;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* DELIVERY INFO */
+
+.delivery-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.info-item {
+  padding: 15px;
+  background: #f7faf8;
+  border-radius: 8px;
+}
+
+.info-item span {
+  display: block;
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.info-item strong {
+  color: #333;
+}
+
+/* TRACKING */
+
+.tracking {
+  margin-top: 25px;
+  position: relative;
+}
+
+.tracking-step {
+  display: flex;
+  gap: 18px;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.tracking-step:last-child {
+  padding-bottom: 0;
+}
+
+.step-icon {
+  min-width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #ddd;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  z-index: 2;
+}
+
+.tracking-step.completed .step-icon {
+  background: #218c4b;
+}
+
+.tracking-step.active .step-icon {
+  background: #f4a62a;
+}
+
+.tracking-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 45px;
+  width: 2px;
+  height: calc(100% - 45px);
+  background: #ddd;
+}
+
+.tracking-step.completed:not(:last-child)::after {
+  background: #218c4b;
+}
+
+.step-content h3 {
+  margin: 3px 0 6px;
+  color: #333;
+}
+
+.step-content p {
+  margin: 0 0 5px;
+  color: #666;
+}
+
+.step-content small {
+  color: #999;
+}
+
+/* DELIVERY PERSON */
+
+.person-details {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.person-avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #e9f8ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+}
+
+.person-details h3 {
+  margin: 0 0 5px;
+  color: #333;
+}
+
+.person-details p {
+  margin: 4px 0;
+  color: #666;
+}
+
+/* ADDRESS */
+
+.address-box {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  background: #f7faf8;
+  padding: 18px;
+  border-radius: 10px;
+}
+
+.address-box span {
+  font-size: 25px;
+}
+
+.address-box p {
+  margin: 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* BUTTONS */
+
+.delivery-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.dashboard-btn,
+.new-order-btn {
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.dashboard-btn {
+  background: #218c4b;
+  color: white;
+}
+
+.new-order-btn {
+  border: 2px solid #218c4b;
+  color: #218c4b;
+  background: white;
+}
+
+.dashboard-btn:hover {
+  background: #176b38;
+}
+
+.new-order-btn:hover {
+  background: #effaf3;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .delivery-navbar {
+    padding: 0 4%;
+  }
+
+  .delivery-logo {
+    font-size: 17px;
+  }
+
+  .delivery-nav-links {
+    gap: 10px;
+  }
+
+  .delivery-info {
+    grid-template-columns: 1fr;
+  }
+
+  .card-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .delivery-buttons {
+    flex-direction: column;
+  }
+
+  .dashboard-btn,
+  .new-order-btn {
+    text-align: center;
+  }
+}
