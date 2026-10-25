@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -9,17 +8,6 @@ function Login() {
     email: "",
     password: "",
   });
-
-  const handleLogin = (e) => {
-  e.preventDefault();
-
-  // Temporary frontend login
-  localStorage.setItem("customerLoggedIn", "true");
-
-  alert("Login successful!");
-
-  navigate("/dashboard");
-};
 
   const handleChange = (e) => {
     setFormData({
@@ -31,7 +19,14 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    alert("Login button clicked!");
+    // Temporary frontend login
+    localStorage.setItem("customerLoggedIn", "true");
+
+    // Show successful login message
+    alert("Login successful!");
+
+    // Open Customer Dashboard
+    navigate("/dashboard");
   };
 
   return (
@@ -100,7 +95,6 @@ function Login() {
 
           <p className="register-text">
             Don't have an account?
-
             <Link to="/register">
               Register Now
             </Link>

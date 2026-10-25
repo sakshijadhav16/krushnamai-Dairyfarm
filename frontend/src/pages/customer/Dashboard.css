@@ -282,9 +282,17 @@
     grid-template-columns: 1fr;
   }
 
-  .service-cards {
-    grid-template-columns: 1fr 1fr;
-  }
+ .service-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
 
   .welcome-section {
     width: 90%;
@@ -328,4 +336,17 @@
   .service-cards {
     grid-template-columns: 1fr;
   }
+}
+.logout-btn {
+  background: none;
+  border: none;
+  color: #218c4b;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.logout-btn:hover {
+  color: #176b38;
 }

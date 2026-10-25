@@ -9,7 +9,10 @@ import OrderMilk from "./pages/customer/OrderMilk";
 import Payment from "./pages/customer/Payment";
 import Delivery from "./pages/customer/Delivery";
 import Profile from "./pages/customer/Profile";
-
+import Orders from "./pages/customer/Orders";
+import DeliveryLogin from "./pages/delivery/DeliveryLogin";
+import DeliveryPerson from "./pages/delivery/DeliveryPerson";
+import MyDeliveries from "./pages/delivery/MyDeliveries";
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +38,23 @@ function App() {
         <Route path="/delivery" element={<Delivery />} />
 
         <Route path="/profile" element={<Profile />} />
+
+        <Route path="/orders" element={<Orders />} />
+
+        <Route
+          path="/delivery-login"
+          element={<DeliveryLogin />}
+        />
+
+        <Route
+          path="/delivery-person"
+          element={<DeliveryPerson />}
+        />
+
+        <Route
+          path="/delivery-orders"
+          element={<MyDeliveries />}
+        />
 
       </Routes>
 

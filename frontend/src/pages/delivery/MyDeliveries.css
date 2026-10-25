@@ -1,0 +1,435 @@
+.my-deliveries-page {
+  min-height: 100vh;
+  background: #f5faf5;
+  color: #263a2b;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.delivery-navbar {
+  height: 70px;
+  padding: 0 7%;
+
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.delivery-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1d6536;
+}
+
+.delivery-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.delivery-nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+.delivery-nav-links a:hover {
+  color: #218c4b;
+}
+
+.delivery-logout {
+  background: none;
+  border: none;
+
+  color: #218c4b;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.delivery-logout:hover {
+  color: #176b38;
+}
+
+
+/* ================= HEADER ================= */
+
+.deliveries-header {
+  text-align: center;
+
+  padding: 50px 20px 30px;
+}
+
+.section-label {
+  color: #218c4b;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 8px;
+}
+
+.deliveries-header h1 {
+  color: #1d6536;
+
+  font-size: 36px;
+
+  margin: 0 0 10px;
+}
+
+.deliveries-header p:last-child {
+  color: #777;
+
+  margin: 0;
+}
+
+
+/* ================= FILTERS ================= */
+
+.delivery-filters {
+  max-width: 1050px;
+
+  margin: 0 auto 30px;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.delivery-filters button {
+  padding: 10px 20px;
+
+  border: 1px solid #218c4b;
+
+  border-radius: 20px;
+
+  background: white;
+
+  color: #218c4b;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.delivery-filters button:hover,
+.delivery-filters .filter-active {
+  background: #218c4b;
+  color: white;
+}
+
+
+/* ================= DELIVERY CONTAINER ================= */
+
+.deliveries-container {
+  max-width: 1050px;
+
+  margin: auto;
+
+  padding: 0 20px 40px;
+}
+
+
+/* ================= CARD ================= */
+
+.my-delivery-card {
+  background: white;
+
+  padding: 25px;
+
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+
+/* ================= CARD HEADER ================= */
+
+.delivery-card-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #eee;
+}
+
+.delivery-card-header h3 {
+  color: #1d6536;
+
+  margin: 0 0 5px;
+}
+
+.delivery-card-header p {
+  color: #888;
+
+  font-size: 13px;
+
+  margin: 0;
+}
+
+
+/* ================= STATUS ================= */
+
+.status-pending,
+.status-out,
+.status-delivered {
+  padding: 7px 13px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: bold;
+}
+
+.status-pending {
+  color: #b27a00;
+  background: #fff5dc;
+}
+
+.status-out {
+  color: #176b38;
+  background: #e9f7ee;
+}
+
+.status-delivered {
+  color: #218c4b;
+  background: #effaf3;
+}
+
+
+/* ================= CUSTOMER ================= */
+
+.delivery-customer {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin: 20px 0;
+}
+
+.customer-icon {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  background: #effaf3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 25px;
+}
+
+.delivery-customer h4 {
+  color: #1d6536;
+
+  margin: 0 0 7px;
+
+  font-size: 17px;
+}
+
+.delivery-customer p {
+  color: #666;
+
+  font-size: 14px;
+
+  margin: 4px 0;
+}
+
+
+/* ================= DELIVERY INFO ================= */
+
+.delivery-info {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 15px;
+
+  padding: 18px;
+
+  background: #f5faf5;
+
+  border-radius: 8px;
+
+  margin-bottom: 20px;
+}
+
+.delivery-info div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.delivery-info span {
+  color: #888;
+
+  font-size: 12px;
+}
+
+.delivery-info strong {
+  color: #333;
+
+  font-size: 14px;
+}
+
+
+/* ================= FOOTER ================= */
+
+.delivery-card-footer {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.details-btn {
+  padding: 11px 20px;
+
+  border: 2px solid #218c4b;
+
+  border-radius: 6px;
+
+  color: #218c4b;
+
+  background: white;
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+.details-btn:hover {
+  background: #effaf3;
+}
+
+.mark-delivered-btn {
+  padding: 12px 20px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #218c4b;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.mark-delivered-btn:hover {
+  background: #176b38;
+}
+
+.completed-text {
+  color: #218c4b;
+
+  font-weight: 600;
+
+  font-size: 14px;
+}
+
+
+/* ================= BACK ================= */
+
+.back-dashboard {
+  text-align: center;
+
+  padding-bottom: 50px;
+}
+
+.back-dashboard a {
+  color: #218c4b;
+
+  text-decoration: none;
+
+  font-weight: 600;
+}
+
+.back-dashboard a:hover {
+  text-decoration: underline;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 800px) {
+
+  .delivery-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .delivery-card-header {
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .delivery-navbar {
+    padding: 0 20px;
+  }
+
+  .delivery-logo {
+    font-size: 16px;
+  }
+
+  .delivery-nav-links {
+    gap: 10px;
+  }
+
+  .delivery-nav-links a {
+    display: none;
+  }
+
+  .deliveries-header h1 {
+    font-size: 30px;
+  }
+
+  .delivery-info {
+    grid-template-columns: 1fr;
+  }
+
+  .delivery-card-footer {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .details-btn,
+  .mark-delivered-btn {
+    text-align: center;
+  }
+}

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Payment.css";
@@ -5,41 +6,157 @@ import "./Payment.css";
 function Payment() {
   const navigate = useNavigate();
 
-  const [paymentMethod, setPaymentMethod] = useState("UPI");
+  // Get the customer's milk order
+  const [order] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("currentMilkOrder")) || null;
+    } catch {
+      return null;
+    }
+  });
 
-  const [upiId, setUpiId] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardName, setCardName] = useState("");
-  const [expiry, setExpiry] = useState("");
-  const [cvv, setCvv] = useState("");
+  // Format dates for display
+  const formatDate = (date) => {
+    if (!date) return "Not specified";
 
-  const handlePayment = (e) => {
-    e.preventDefault();
+    const parsedDate = new Date(`${date}T00:00:00`);
 
-    if (paymentMethod === "UPI" && !upiId.trim()) {
-      alert("Please enter your UPI ID.");
+    if (Number.isNaN(parsedDate.getTime())) {
+      return "Not specified";
+    }
+
+    return parsedDate.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  // Calculate order amount
+  const quantity = Number(order?.quantity) || 0;
+
+  const planDays = {
+    "1 Day": 1,
+    "7 Days": 7,
+    "15 Days": 15,
+    "30 Days": 30,
+  };
+
+  const duration =
+    Number(order?.duration) ||
+    planDays[order?.plan] ||
+    1;
+
+  const pricePerLiter = Number(order?.pricePerLiter) || 0;
+
+  const dailyAmount =
+    Number(order?.dailyAmount) ||
+    pricePerLiter * quantity;
+
+  const totalAmount =
+    Number(order?.totalAmount) ||
+    dailyAmount * duration;
+
+  // Confirm order without collecting payment
+  const handleConfirmOrder = () => {
+    if (!order) {
+      alert("Please place a milk order first.");
+      navigate("/order-milk");
       return;
     }
 
-    if (
-      paymentMethod === "Card" &&
-      (!cardNumber || !cardName || !expiry || !cvv)
-    ) {
-      alert("Please enter all card details.");
+    if (!order.address || !order.startDate) {
+      alert("Please provide your delivery address and start date.");
+      navigate("/order-milk");
       return;
     }
 
-    alert("Payment successful!");
+    const updatedOrder = {
+      ...order,
+      orderId:
+        order.orderId || `KM${Date.now().toString().slice(-6)}`,
+      deliveryFrequency: "Daily",
+      paymentMethod: "Pay After Subscription",
+      paymentStatus: "Pending",
+      deliveryStatus: "Order Confirmed",
+      orderConfirmed: true,
+      orderDate: new Date().toISOString(),
+    };
+
+    // Save the confirmed order
+    localStorage.setItem(
+      "currentMilkOrder",
+      JSON.stringify(updatedOrder)
+    );
+
+    // Save order history without duplicating the same order
+    let previousOrders = [];
+
+    try {
+      previousOrders = JSON.parse(
+        localStorage.getItem("milkOrders") || "[]"
+      );
+
+      if (!Array.isArray(previousOrders)) {
+        previousOrders = [];
+      }
+    } catch {
+      previousOrders = [];
+    }
+
+    const orderExists = previousOrders.some(
+      (item) => item.orderId === updatedOrder.orderId
+    );
+
+    if (!orderExists) {
+      localStorage.setItem(
+        "milkOrders",
+        JSON.stringify([...previousOrders, updatedOrder])
+      );
+    }
+
+    alert(
+      "Your milk order has been confirmed! You can pay after your subscription period ends."
+    );
 
     navigate("/delivery");
   };
 
+  // If no order exists
+  if (!order) {
+    return (
+      <div className="payment-page">
+        <nav className="payment-navbar">
+          <div className="payment-logo">
+            🐄 Krushnamai Dairy Farm
+          </div>
+
+          <div className="payment-nav-links">
+            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/order-milk">Order Milk</Link>
+          </div>
+        </nav>
+
+        <div className="payment-container">
+          <div className="payment-header">
+            <h1>No Milk Order Found</h1>
+            <p>
+              Please place your milk order before confirming it.
+            </p>
+
+            <Link to="/order-milk" className="pay-btn">
+              Order Milk
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="payment-page">
-
       {/* NAVBAR */}
       <nav className="payment-navbar">
-
         <div className="payment-logo">
           🐄 Krushnamai Dairy Farm
         </div>
@@ -48,204 +165,146 @@ function Payment() {
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/order-milk">Order Milk</Link>
         </div>
-
       </nav>
 
-      {/* PAYMENT CONTAINER */}
+      {/* MAIN CONTAINER */}
       <div className="payment-container">
-
         <div className="payment-header">
-          <h1>Milk Order Payment 💳</h1>
+          <h1>Confirm Your Milk Order 🥛</h1>
 
           <p>
-            Complete your payment to confirm your milk order.
+            Review your order details. You do not need to pay now.
           </p>
         </div>
 
         <div className="payment-content">
-
           {/* ORDER SUMMARY */}
           <div className="payment-summary">
-
             <h2>Order Summary</h2>
 
             <div className="payment-summary-item">
+              <span>Order ID</span>
+              <strong>
+                {order.orderId || "Generated on confirmation"}
+              </strong>
+            </div>
+
+            <div className="payment-summary-item">
               <span>Milk Type</span>
-              <strong>Cow Milk</strong>
+              <strong>{order.milkType}</strong>
             </div>
 
             <div className="payment-summary-item">
               <span>Quantity</span>
-              <strong>1 Liter / Day</strong>
+              <strong>{quantity} Liter(s) / Day</strong>
             </div>
 
             <div className="payment-summary-item">
-              <span>Payment Plan</span>
-              <strong>15 Days</strong>
+              <span>Subscription Plan</span>
+              <strong>{order.plan}</strong>
             </div>
 
             <div className="payment-summary-item">
-              <span>Delivery</span>
-              <strong>Home Delivery</strong>
+              <span>Subscription Duration</span>
+              <strong>{duration} Day(s)</strong>
+            </div>
+
+            <div className="payment-summary-item">
+              <span>Delivery Frequency</span>
+              <strong>Daily</strong>
+            </div>
+
+            <div className="payment-summary-item">
+              <span>Start Date</span>
+              <strong>{formatDate(order.startDate)}</strong>
+            </div>
+
+            <div className="payment-summary-item">
+              <span>End Date</span>
+              <strong>{formatDate(order.endDate)}</strong>
+            </div>
+
+            <div className="payment-summary-item">
+              <span>Delivery Address</span>
+              <strong>{order.address}</strong>
+            </div>
+
+            <div className="payment-summary-item">
+              <span>Price Per Liter</span>
+              <strong>₹{pricePerLiter.toFixed(2)}</strong>
+            </div>
+
+            <div className="payment-summary-item">
+              <span>Daily Amount</span>
+              <strong>₹{dailyAmount.toFixed(2)}</strong>
             </div>
 
             <div className="payment-total">
-              <span>Total Amount</span>
-              <strong>₹900</strong>
+              <span>Total Subscription Amount</span>
+              <strong>₹{totalAmount.toFixed(2)}</strong>
             </div>
 
+            <div className="payment-summary-item">
+              <span>Payment Due Date</span>
+              <strong>{formatDate(order.paymentDueDate)}</strong>
+            </div>
           </div>
 
-          {/* PAYMENT FORM */}
-          <form
-            className="payment-form"
-            onSubmit={handlePayment}
-          >
+          {/* PAYMENT INFORMATION */}
+          <div className="payment-form">
+            <h2>Payment Information</h2>
 
-            <h2>Choose Payment Method</h2>
+            <div className="cash-message">
+              <div className="cash-icon">🗓️</div>
 
-            {/* PAYMENT METHODS */}
-            <div className="payment-methods">
+              <h3>Pay After Subscription Ends</h3>
 
-              <button
-                type="button"
-                className={
-                  paymentMethod === "UPI"
-                    ? "method-btn active"
-                    : "method-btn"
-                }
-                onClick={() => setPaymentMethod("UPI")}
-              >
-                📱 UPI
-              </button>
+              <p>
+                Your order will be confirmed now. Fresh milk will be
+                delivered to your address daily during your selected
+                subscription period.
+              </p>
 
-              <button
-                type="button"
-                className={
-                  paymentMethod === "Card"
-                    ? "method-btn active"
-                    : "method-btn"
-                }
-                onClick={() => setPaymentMethod("Card")}
-              >
-                💳 Card
-              </button>
-
-              <button
-                type="button"
-                className={
-                  paymentMethod === "Cash"
-                    ? "method-btn active"
-                    : "method-btn"
-                }
-                onClick={() => setPaymentMethod("Cash")}
-              >
-                💵 Cash
-              </button>
-
+              <p>
+                You do not need to make a payment today. The total
+                subscription amount will be due after your selected
+                subscription period ends.
+              </p>
             </div>
 
-            {/* UPI */}
-            {paymentMethod === "UPI" && (
-              <div className="payment-details">
+            <div className="payment-summary-item">
+              <span>Payment Method</span>
+              <strong>Pay After Subscription</strong>
+            </div>
 
-                <label>UPI ID</label>
+            <div className="payment-summary-item">
+              <span>Payment Status</span>
+              <strong className="pending-payment">Pending</strong>
+            </div>
 
-                <input
-                  type="text"
-                  placeholder="example@upi"
-                  value={upiId}
-                  onChange={(e) => setUpiId(e.target.value)}
-                />
+            <div className="payment-summary-item">
+              <span>Order Status</span>
+              <strong>Awaiting Confirmation</strong>
+            </div>
 
-              </div>
-            )}
-
-            {/* CARD */}
-            {paymentMethod === "Card" && (
-              <div className="payment-details">
-
-                <label>Card Number</label>
-
-                <input
-                  type="text"
-                  placeholder="1234 5678 9012 3456"
-                  maxLength="19"
-                  value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
-                />
-
-                <label>Card Holder Name</label>
-
-                <input
-                  type="text"
-                  placeholder="Enter card holder name"
-                  value={cardName}
-                  onChange={(e) => setCardName(e.target.value)}
-                />
-
-                <div className="card-row">
-
-                  <div>
-                    <label>Expiry Date</label>
-
-                    <input
-                      type="text"
-                      placeholder="MM/YY"
-                      value={expiry}
-                      onChange={(e) => setExpiry(e.target.value)}
-                    />
-                  </div>
-
-                  <div>
-                    <label>CVV</label>
-
-                    <input
-                      type="password"
-                      placeholder="123"
-                      maxLength="3"
-                      value={cvv}
-                      onChange={(e) => setCvv(e.target.value)}
-                    />
-                  </div>
-
-                </div>
-
-              </div>
-            )}
-
-            {/* CASH */}
-            {paymentMethod === "Cash" && (
-              <div className="cash-message">
-
-                <div className="cash-icon">💵</div>
-
-                <h3>Cash on Delivery</h3>
-
-                <p>
-                  You can pay the delivery person when your
-                  milk order is delivered.
-                </p>
-
-              </div>
-            )}
-
-            {/* PAY BUTTON */}
             <button
-              type="submit"
+              type="button"
               className="pay-btn"
+              onClick={handleConfirmOrder}
             >
-              {paymentMethod === "Cash"
-                ? "Confirm Order"
-                : "Pay ₹900"}
+              Confirm Milk Order
             </button>
 
-          </form>
+            <p className="payment-note">
+              No payment will be collected when you confirm this order.
+            </p>
 
+            <Link to="/order-milk" className="back-order-link">
+              ← Go Back and Edit Order
+            </Link>
+          </div>
         </div>
-
       </div>
-
     </div>
   );
 }

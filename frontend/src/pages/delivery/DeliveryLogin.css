@@ -1,0 +1,184 @@
+.delivery-login-page {
+  min-height: 100vh;
+  display: flex;
+  background: #f5faf5;
+}
+
+/* LEFT SIDE */
+
+.delivery-login-left {
+  width: 50%;
+  background: linear-gradient(
+      rgba(29, 101, 54, 0.65),
+      rgba(29, 101, 54, 0.65)
+    ),
+    url("../../assets/hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delivery-login-overlay {
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+.delivery-login-overlay h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.delivery-login-overlay p {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* RIGHT SIDE */
+
+.delivery-login-right {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.delivery-login-box {
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-login-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+  background: #effaf3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 35px;
+}
+
+.delivery-login-box h2 {
+  text-align: center;
+  color: #1d6536;
+  margin-bottom: 8px;
+}
+
+.delivery-login-subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+/* FORM */
+
+.delivery-login-box label {
+  display: block;
+  margin-bottom: 7px;
+  color: #333;
+  font-weight: 600;
+}
+
+.delivery-login-box input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px;
+  margin-bottom: 18px;
+
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  font-size: 14px;
+}
+
+.delivery-login-box input:focus {
+  outline: none;
+  border-color: #218c4b;
+}
+
+.delivery-forgot {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.delivery-forgot a {
+  color: #218c4b;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.delivery-forgot a:hover {
+  text-decoration: underline;
+}
+
+.delivery-login-box button {
+  width: 100%;
+
+  padding: 12px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #218c4b;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delivery-login-box button:hover {
+  background: #176b38;
+}
+
+.delivery-login-note {
+  text-align: center;
+  margin-top: 22px;
+
+  color: #888;
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  .delivery-login-page {
+    flex-direction: column;
+  }
+
+  .delivery-login-left,
+  .delivery-login-right {
+    width: 100%;
+  }
+
+  .delivery-login-left {
+    min-height: 280px;
+  }
+
+  .delivery-login-overlay h1 {
+    font-size: 28px;
+  }
+
+  .delivery-login-box {
+    padding: 30px;
+  }
+}

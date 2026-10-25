@@ -41,9 +41,9 @@ function Dashboard() {
           </p>
         </div>
 
-        <div className="customer-icon">
+        <Link to="/profile" className="customer-icon">
           👤
-        </div>
+        </Link>
       </section>
 
       {/* QUICK OPTIONS */}
@@ -137,32 +137,31 @@ function Dashboard() {
 
         <div className="service-cards">
 
-          <div className="service-card">
+          <Link to="/orders" className="service-card">
             <div className="service-icon">🛒</div>
             <h3>My Orders</h3>
             <p>View your milk orders.</p>
-          </div>
+          </Link>
 
-          <div className="service-card">
+          <Link to="/delivery" className="service-card">
             <div className="service-icon">🚚</div>
             <h3>Delivery Status</h3>
             <p>Track your milk delivery.</p>
-          </div>
+          </Link>
 
-          <div className="service-card">
+          <Link to="/payment" className="service-card">
             <div className="service-icon">💳</div>
             <h3>Payments</h3>
             <p>View your payment details.</p>
-          </div>
+          </Link>
 
-          <div className="service-card">
+          <Link to="/profile" className="service-card">
             <div className="service-icon">👤</div>
             <h3>My Profile</h3>
             <p>Manage your customer profile.</p>
-          </div>
+          </Link>
 
         </div>
-
       </section>
 
       {/* FOOTER */}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
+import buffaloMilk from "../../assets/buffalo-milk.jpg";
 
 const cowMilkImage =
   "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=900&q=80";
@@ -163,7 +164,10 @@ const handleOrderSubmit = (e) => {
                 <span>Quality Checked</span>
               </div>
 
-              <button className="order-btn">
+              <button
+                className="order-btn"
+                onClick={() => navigate("/order-milk")}
+              >
                 Order Cow Milk
               </button>
             </div>
@@ -171,8 +175,10 @@ const handleOrderSubmit = (e) => {
 
           {/* BUFFALO MILK */}
           <div className="milk-card">
-            <img src={buffaloMilkImage} alt="Fresh Buffalo Milk" />
-
+            <img
+              src={buffaloMilk}
+              alt="Fresh Buffalo Milk"
+            />
             <div className="milk-card-content">
               <span className="milk-icon">🐃</span>
 
@@ -188,7 +194,10 @@ const handleOrderSubmit = (e) => {
                 <span>Quality Checked</span>
               </div>
 
-              <button className="order-btn">
+              <button
+                className="order-btn"
+                onClick={() => navigate("/order-milk")}
+              >
                 Order Buffalo Milk
               </button>
             </div>

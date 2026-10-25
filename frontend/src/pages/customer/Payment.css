@@ -275,4 +275,63 @@
   .payment-summary {
     padding: 20px;
   }
+  
+.pending-payment {
+  color: #b7791f;
+  background: #fff3cd;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.payment-note {
+  margin-top: 15px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.back-order-link {
+  display: block;
+  margin-top: 18px;
+  text-align: center;
+  color: #218c4b;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-order-link:hover {
+  text-decoration: underline;
+}
+
+.payment-form .pay-btn {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.payment-form .cash-message {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f0f8f1;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.payment-form .cash-icon {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.payment-form .cash-message h3 {
+  color: #176b38;
+  margin-bottom: 10px;
+}
+
 }
